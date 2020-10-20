@@ -1,0 +1,22 @@
+PODS:
+  - Alamofire (5.0.5)
+  - Kingfisher (5.15.6):
+    - Kingfisher/Core (= 5.15.6)
+  - Kingfisher/Core (5.15.6)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0.0)
+  - Kingfisher (~> 5.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Kingfisher
+
+SPEC CHECKSUMS:
+  Alamofire: df2f8f826963b08b9a870791ad48e07a10090b2e
+  Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
+
+PODFILE CHECKSUM: 836a1e9de28ba45e03bd9b6cc0ae691553d560e8
+
+COCOAPODS: 1.9.3
