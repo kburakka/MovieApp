@@ -18,7 +18,7 @@ public struct MovieDbRes:Decodable, Equatable {
     }
     
     public let page: Int
-    public let results: [Result]
+    public let results: [MovieResult]
     public let total_results: Int
     public let total_pages: Int
 }

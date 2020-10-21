@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Result:Decodable, Equatable {
+public struct MovieResult:Decodable, Equatable {
     
     public enum CodingKeys: String, CodingKey {
         case poster_path
