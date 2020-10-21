@@ -6,9 +6,9 @@
 //  Copyright © 2020 Burak KAYA. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
-public struct MovieDbErr:Decodable, Equatable {
+public struct MovieDbErr:Decodable, Equatable,Error {
     
     public enum CodingKeys: String, CodingKey {
         case status_message

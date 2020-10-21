@@ -52,7 +52,6 @@ enum APIRouter: URLRequestConvertible {
     
     func asURLRequest() throws -> URLRequest {
         let urlString = ProductionServer.baseUrl + path + "api_key=" + ProductionServer.apiKey
-        print(urlString)
         let url = try urlString.asURL()
         
         var urlRequest = URLRequest(url: url)
