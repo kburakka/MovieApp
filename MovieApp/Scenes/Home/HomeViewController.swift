@@ -10,7 +10,6 @@ import UIKit
 import Kingfisher
 
 class HomeViewController: UIViewController, UIScrollViewDelegate {
-    var presenter : HomePresenterProtocol!
 
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var upcomingTableView: UITableView!
@@ -20,6 +19,8 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var searchView: UIView!
     
+    var presenter : HomePresenterProtocol!
+
     var upcomingMovies : [MovieResult] = []{
         didSet{
             upcomingTableView.reloadData()
@@ -87,6 +88,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.pageControl.currentPage = indexPath.row
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? SliderCollectionViewCell
+        presenter.selectMovie(id: nowPlayingMovies[indexPath.row].id, image: cell?.imageView.image)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
@@ -143,6 +148,14 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource{
          }
         return 86
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == upcomingTableView{
+            let cell = tableView.cellForRow(at: indexPath) as? UpcomingTableViewCell
+            presenter.selectMovie(id: upcomingMovies[indexPath.row].id, image: cell?.movieImageView.image)
+         }else if tableView == searchTableView{
+            presenter.selectMovie(id: searchMovies[indexPath.row].id, image: nil)
+        }
+    }
 }
 
 extension HomeViewController : UISearchBarDelegate{
@@ -159,15 +172,19 @@ extension HomeViewController : HomeViewProtocol{
     func handleOutput(_ output: HomePresenterOutput) {
         switch output {
         case .setLoading(let isLoading):
-            print("to do")
+            if isLoading{
+                LoadingView.init(view: view).startAnimation()
+            }else{
+                LoadingView.init(view: view).stopAnimation()
+            }
         case .nowPlayingMovies(let movies):
             self.nowPlayingMovies = movies
         case .searchMovie(let movies):
             self.searchMovies = movies
         case .upcomingMovies(let movies):
             self.upcomingMovies = movies
-        case .showError(_):
-            print("to do")
+        case .showError(let error):
+            self.showAlert(title: "Hata", message: error.localizedDescription, completionHandler: nil)
         }
     }
 }

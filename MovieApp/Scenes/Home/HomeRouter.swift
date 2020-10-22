@@ -19,7 +19,8 @@ final class HomeRouter : HomeRouterProtocol{
     func navigate(to route: HomeRoute) {
         switch route {
         case .showDetail(let image, let id):
-            print("to od")
+            let detailView = DetailBuilder.make(with: image, id: id)
+            view.show(detailView, sender: nil)
         }
     }
 }

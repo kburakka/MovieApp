@@ -33,7 +33,7 @@ protocol HomeInteractorDelegate: class {
 
 // MARK: - Presenter
 protocol HomePresenterProtocol: class {
-    func selectMovie(at index: Int, image: UIImage?)
+    func selectMovie(id: Int, image: UIImage?)
     func searchMovie(text : String)
     func upcomingMovies()
     func nowPlayingMovies()

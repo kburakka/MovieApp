@@ -23,9 +23,8 @@ final class HomePresenter:HomePresenterProtocol{
          self.interactor.delegate = self
     }
         
-    func selectMovie(at index: Int, image: UIImage?) {
-        //to do
-//        router.navigate(to: .showdtail(image, id))
+    func selectMovie(id: Int, image: UIImage?) {
+        router.navigate(to: .showDetail(image, id))
     }
     
     func homeViewDidLoad() {
