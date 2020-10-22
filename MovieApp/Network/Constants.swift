@@ -11,7 +11,9 @@ import Alamofire
 
 struct ProductionServer {
     static let apiKey = "2aa4022c70415d52f076f0c5f22c9b7e"
-    static let baseUrl = "https://api.themoviedb.org/3/"}
+    static let baseUrl = "https://api.themoviedb.org/3/"
+    static let posterUrl = "https://image.tmdb.org/t/p/w500"
+}
 
 enum HTTPHeaderField: String {
     case authentication = "Authorization"

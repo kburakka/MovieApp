@@ -37,6 +37,7 @@ protocol HomePresenterProtocol: class {
     func searchMovie(text : String)
     func upcomingMovies()
     func nowPlayingMovies()
+    func homeViewDidLoad()
 }
 
 enum HomePresenterOutput {

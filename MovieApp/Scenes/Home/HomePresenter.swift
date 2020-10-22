@@ -9,7 +9,6 @@
 import UIKit
 
 final class HomePresenter:HomePresenterProtocol{
-
     private unowned let view: HomeViewProtocol
     private let interactor: HomeInteractorProtocol
     private let router: HomeRouterProtocol
@@ -29,6 +28,12 @@ final class HomePresenter:HomePresenterProtocol{
 //        router.navigate(to: .showdtail(image, id))
     }
     
+    func homeViewDidLoad() {
+        upcomingMovies()
+        nowPlayingMovies()
+    }
+    
+
     func searchMovie(text: String) {
         interactor.searchMovie(text: text)
     }
