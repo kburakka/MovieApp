@@ -15,6 +15,7 @@ class UpcomingTableViewCell: UITableViewCell {
     @IBOutlet weak var movieDescription: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        movieDescription.sizeToFit()
         // Initialization code
     }
 

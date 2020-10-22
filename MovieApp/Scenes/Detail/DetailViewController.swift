@@ -10,20 +10,75 @@ import UIKit
 
 class DetailViewController: UIViewController {
     var presenter: DetailPresenterProtocol!
-    private var detail : MovieDetail?
-    private var poster = UIImageView()
-    private var similarMovies : [MovieResult] = []
+    private var movieDetail : MovieDetail?
+    private var similarMovies : [MovieResult] = []{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
+    @IBOutlet weak var poster: UIImageView!
+    @IBOutlet weak var movieTitle: UILabel!
+    @IBOutlet weak var movieDescription: UILabel!
+    @IBOutlet weak var movieRate: UILabel!
+    @IBOutlet weak var movieDate: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.register(UINib.init(nibName: "SimilarCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SimilarCollectionViewCell")
+        collectionView.layoutIfNeeded()
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         presenter.detailViewDidLoad()
     }
     
     func setUI(){
-        
+        if let detail = self.movieDetail{
+            movieTitle.text = detail.original_title
+            movieDescription.text = detail.overview
+            movieRate.text = "\(detail.vote_average)"
+            movieDate.text = detail.release_date
+            movieDescription.sizeToFit()
+        }
     }
     
+    @IBAction func imdbButton(_ sender: Any) {
+        if let detail = self.movieDetail{
+            if let imdbId = detail.imdb_id{
+                presenter.showImdbPage(imdbId: imdbId)
+            }else{
+                self.showAlert(title: "Error", message: "There is no IMDB page", completionHandler: nil)
+            }
+        }else{
+            self.showAlert(title: "Error", message: "There is no movie detail", completionHandler: nil)
+        }
+    }
 }
 
+extension DetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return similarMovies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimilarCollectionViewCell", for: indexPath) as! SimilarCollectionViewCell
+        if similarMovies.count > indexPath.row{
+            if let path = similarMovies[indexPath.row].backdrop_path {
+                cell.moviePoster.kf.setImage(with: URL(string: ProductionServer.posterUrl + path))
+            }
+            cell.movieTitle.text = similarMovies[indexPath.row].original_title
+        }
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.newMovieSelected(id: similarMovies[indexPath.row].id)
+    }
+}
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 105)
+    }
+}
 extension DetailViewController: DetailViewProtocol{
     func handleOutput(_ output: DetailPresenterOutput) {
         switch output {
@@ -34,7 +89,7 @@ extension DetailViewController: DetailViewProtocol{
                 LoadingView.init(view: view).stopAnimation()
             }
         case .showDetail(let detail,let image):
-            self.detail = detail
+            self.movieDetail = detail
             if image != nil{
                 self.poster.image = image
             }else{

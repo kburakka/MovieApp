@@ -12,7 +12,7 @@ final class DetailPresenter: DetailPresenterProtocol {
 
     unowned var view: DetailViewProtocol
     private let id: Int
-    private let image: UIImage?
+    private var image: UIImage?
     private let interactor: DetailInteractorProtocol
 
     init(view: DetailViewProtocol, image: UIImage?, id: Int, interactor : DetailInteractorProtocol) {
@@ -32,9 +32,21 @@ final class DetailPresenter: DetailPresenterProtocol {
         interactor.showSimilarMovies(id: id)
     }
     
+    func newMovieSelected(id: Int) {
+        showDetail(id: id)
+        showSimilarMovies(id: id)
+    }
+    
     func detailViewDidLoad() {
         showDetail(id: id)
         showSimilarMovies(id: id)
+    }
+    
+    func showImdbPage(imdbId: String) {
+        let imdbBaseUrl = "https://www.imdb.com/title/"
+        if let url = URL(string: imdbBaseUrl + imdbId) {
+            UIApplication.shared.open(url)
+        }
     }
 }
 
@@ -45,6 +57,7 @@ extension DetailPresenter: DetailInteractorDelegate{
             view.handleOutput(.setLoading(isLoading))
         case .showDetail(let detail):
             view.handleOutput(.showDetail(detail, image))
+            image = nil
         case .showSimilarMovies(let movies):
             view.handleOutput(.showSimilarMovies(movies))
         case .showError(let error):

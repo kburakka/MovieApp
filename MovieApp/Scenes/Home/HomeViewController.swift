@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var searchView: UIView!
     
     var presenter : HomePresenterProtocol!
-
+    var didEndEditing = false
     var upcomingMovies : [MovieResult] = []{
         didSet{
             upcomingTableView.reloadData()
@@ -62,6 +62,29 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         registerNibs()
         presenter.homeViewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        searchView.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        if didEndEditing{
+            searchView.isHidden = true
+        }
+        
+        view.endEditing(true)
+        didEndEditing = true
     }
     
     func registerNibs(){
@@ -78,10 +101,12 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCollectionViewCell", for: indexPath) as! SliderCollectionViewCell
-        if let path = nowPlayingMovies[indexPath.row].backdrop_path {
-            cell.imageView.kf.setImage(with: URL(string: ProductionServer.posterUrl + path))
+        if nowPlayingMovies.count > indexPath.row{
+            if let path = nowPlayingMovies[indexPath.row].backdrop_path {
+                cell.imageView.kf.setImage(with: URL(string: ProductionServer.posterUrl + path))
+            }
+            cell.title.text = nowPlayingMovies[indexPath.row].original_title
         }
-        cell.title.text = nowPlayingMovies[indexPath.row].original_title
         return cell
     }
 
@@ -126,15 +151,19 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == upcomingTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: "UpcomingTableViewCell") as! UpcomingTableViewCell
-            if let path = nowPlayingMovies[indexPath.row].backdrop_path {
-                cell.movieImageView.kf.setImage(with: URL(string: ProductionServer.posterUrl + path))
+            if nowPlayingMovies.count > indexPath.row{
+                if let path = nowPlayingMovies[indexPath.row].backdrop_path {
+                    cell.movieImageView.kf.setImage(with: URL(string: ProductionServer.posterUrl + path))
+                }
+                cell.title.text = nowPlayingMovies[indexPath.row].original_title
+                cell.movieDescription.text = nowPlayingMovies[indexPath.row].overview
             }
-            cell.title.text = nowPlayingMovies[indexPath.row].original_title
-            cell.movieDescription.text = nowPlayingMovies[indexPath.row].overview
             return cell
         }else if tableView == searchTableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell") as! SearchTableViewCell
-            cell.searchTitle.text = searchMovies[indexPath.row].original_title
+            if searchMovies.count > indexPath.row{
+                cell.searchTitle.text = searchMovies[indexPath.row].original_title
+            }
             return cell
         }
         return UITableViewCell()
@@ -161,6 +190,7 @@ extension HomeViewController : UITableViewDelegate,UITableViewDataSource{
 extension HomeViewController : UISearchBarDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
+        didEndEditing = false
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

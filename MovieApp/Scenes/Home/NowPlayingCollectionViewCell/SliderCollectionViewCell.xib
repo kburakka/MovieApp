@@ -19,8 +19,8 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8O5-1D-V8A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="206"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaN-sJ-Wq9">
-                        <rect key="frame" x="8" y="155" width="304" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qaN-sJ-Wq9">
+                        <rect key="frame" x="16" y="145" width="288" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="tb5-tv-0Lb"/>
                         </constraints>
@@ -33,9 +33,9 @@
             <constraints>
                 <constraint firstItem="8O5-1D-V8A" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2jR-XP-FR9"/>
                 <constraint firstAttribute="bottom" secondItem="8O5-1D-V8A" secondAttribute="bottom" id="3gA-dl-4QW"/>
-                <constraint firstAttribute="bottom" secondItem="qaN-sJ-Wq9" secondAttribute="bottom" constant="30" id="8od-9L-7Yt"/>
-                <constraint firstItem="qaN-sJ-Wq9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="Pnn-hR-7Im"/>
-                <constraint firstAttribute="trailing" secondItem="qaN-sJ-Wq9" secondAttribute="trailing" constant="8" id="f9s-p5-ked"/>
+                <constraint firstAttribute="bottom" secondItem="qaN-sJ-Wq9" secondAttribute="bottom" constant="40" id="8od-9L-7Yt"/>
+                <constraint firstItem="qaN-sJ-Wq9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="Pnn-hR-7Im"/>
+                <constraint firstAttribute="trailing" secondItem="qaN-sJ-Wq9" secondAttribute="trailing" constant="16" id="f9s-p5-ked"/>
                 <constraint firstAttribute="trailing" secondItem="8O5-1D-V8A" secondAttribute="trailing" id="hPG-hE-hne"/>
                 <constraint firstItem="8O5-1D-V8A" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kuu-0t-jQ6"/>
             </constraints>

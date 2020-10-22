@@ -34,6 +34,8 @@ protocol DetailPresenterProtocol: class {
     func showDetail(id: Int)
     func showSimilarMovies(id: Int)
     func detailViewDidLoad()
+    func newMovieSelected(id: Int)
+    func showImdbPage(imdbId: String)
 }
 
 enum DetailPresenterOutput {

@@ -47,6 +47,8 @@
 		B33B7EB82541C3A900AFC91E /* DetailBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B7EB72541C3A900AFC91E /* DetailBuilder.swift */; };
 		B33B7EBA2541C3C200AFC91E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B7EB92541C3C200AFC91E /* DetailViewController.swift */; };
 		B33B7EBC2541C3DE00AFC91E /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B33B7EBB2541C3DE00AFC91E /* Detail.storyboard */; };
+		B33B7EC02541D9D700AFC91E /* SimilarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B7EBE2541D9D700AFC91E /* SimilarCollectionViewCell.swift */; };
+		B33B7EC12541D9D700AFC91E /* SimilarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B33B7EBF2541D9D700AFC91E /* SimilarCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,8 @@
 		B33B7EB72541C3A900AFC91E /* DetailBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBuilder.swift; sourceTree = "<group>"; };
 		B33B7EB92541C3C200AFC91E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B33B7EBB2541C3DE00AFC91E /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		B33B7EBE2541D9D700AFC91E /* SimilarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarCollectionViewCell.swift; sourceTree = "<group>"; };
+		B33B7EBF2541D9D700AFC91E /* SimilarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimilarCollectionViewCell.xib; sourceTree = "<group>"; };
 		C879AC24CF1EBCC561AC62AE /* Pods-MovieAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieAppTests.debug.xcconfig"; path = "Target Support Files/Pods-MovieAppTests/Pods-MovieAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D67B23B63D82D66C58F17253 /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D79E71975A5C84913E6D5DE0 /* Pods-MovieApp-MovieAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp-MovieAppUITests.release.xcconfig"; path = "Target Support Files/Pods-MovieApp-MovieAppUITests/Pods-MovieApp-MovieAppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -333,6 +337,7 @@
 		B33B7EB02541C11000AFC91E /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				B33B7EBD2541D9B800AFC91E /* SimilarCollectionViewCell */,
 				B33B7EB12541C15000AFC91E /* DetailContracts.swift */,
 				B33B7EB32541C27600AFC91E /* DetailInteractor.swift */,
 				B33B7EB52541C31300AFC91E /* DetailPresenter.swift */,
@@ -341,6 +346,15 @@
 				B33B7EBB2541C3DE00AFC91E /* Detail.storyboard */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		B33B7EBD2541D9B800AFC91E /* SimilarCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B33B7EBE2541D9D700AFC91E /* SimilarCollectionViewCell.swift */,
+				B33B7EBF2541D9D700AFC91E /* SimilarCollectionViewCell.xib */,
+			);
+			path = SimilarCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,6 +472,7 @@
 				B33B7E9B2541840200AFC91E /* UpcomingTableViewCell.xib in Resources */,
 				B33B7EBC2541C3DE00AFC91E /* Detail.storyboard in Resources */,
 				B33B7E962540C91200AFC91E /* SliderCollectionViewCell.xib in Resources */,
+				B33B7EC12541D9D700AFC91E /* SimilarCollectionViewCell.xib in Resources */,
 				B33B7EA925419F8500AFC91E /* SearchTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +620,7 @@
 				B33B7E33253F78A600AFC91E /* AppDelegate.swift in Sources */,
 				B33B7E7825407B1300AFC91E /* ApiError.swift in Sources */,
 				B33B7E70253F853300AFC91E /* APIRouter.swift in Sources */,
+				B33B7EC02541D9D700AFC91E /* SimilarCollectionViewCell.swift in Sources */,
 				B33B7E6B253F830300AFC91E /* MovieDbErr.swift in Sources */,
 				B33B7E74254013CD00AFC91E /* MovieDetail.swift in Sources */,
 				B33B7E67253F810B00AFC91E /* MovieDbRes.swift in Sources */,
